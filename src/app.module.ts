@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User, UserSchema } from '@/users/schemas/user.schema';
 import { AuthModule } from '@/auth/auth.module';
 import { UsersModule } from '@/users/users.module';
+import { AnimeModule } from '@/anime/anime.module';
+import { EpisodesModule } from '@/episodes/episodes.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { UsersModule } from '@/users/users.module';
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     UsersModule,
     AuthModule,
+    AnimeModule,
+    EpisodesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

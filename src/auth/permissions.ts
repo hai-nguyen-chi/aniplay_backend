@@ -11,6 +11,8 @@ export enum Resource {
   Rating = 'rating',
   Comment = 'comment',
   User = 'user',
+  Progress = 'progress',
+  Favorite = 'favorite',
 }
 
 export function hasActions(bits: number, required: Action[]): boolean {
@@ -26,7 +28,7 @@ export function hasResourcePermissions(
 ): boolean {
   if (!userPermissions) return false;
   const get = (key: string): number | undefined =>
-    userPermissions instanceof Map ? userPermissions.get(key) : (userPermissions as any)[key];
+    userPermissions instanceof Map ? userPermissions.get(key) : (userPermissions as Record<string, number>)[key];
 
   const value = get(resource);
   if (typeof value === 'number') return hasActions(value, required);

@@ -46,7 +46,7 @@ export class Anime {
   rating: number;
 
   @Prop({ type: SchemaTypes.Mixed })
-  extra?: Record<string, any>;
+  extra?: Record<string, unknown>;
 }
 
 export const AnimeSchema = SchemaFactory.createForClass(Anime);

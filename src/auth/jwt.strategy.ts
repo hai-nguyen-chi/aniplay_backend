@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { UsersService } from '@/users/users.service';
+import { JwtUser } from '@/auth/types/jwt-payload.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -17,7 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: { sub: string; email: string }) {
+  async validate(payload: { sub: string; email: string }): Promise<JwtUser | null> {
     // Load fresh permissions from DB for each request
     const user = await this.users.findByIdLeanBasic(payload.sub);
     if (!user) return null;
@@ -26,7 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       email: user.email,
       username: user.username,
       permissions: user.permissions,
-    } as any;
+    };
   }
 }
 

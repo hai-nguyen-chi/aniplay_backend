@@ -8,6 +8,11 @@ import { AuthModule } from '@/auth/auth.module';
 import { UsersModule } from '@/users/users.module';
 import { AnimeModule } from '@/anime/anime.module';
 import { EpisodesModule } from '@/episodes/episodes.module';
+import { ProgressModule } from '@/progress/progress.module';
+import { FavoritesModule } from '@/favorites/favorites.module';
+import { RatingsModule } from '@/ratings/ratings.module';
+import { CommentsModule } from '@/comments/comments.module';
+import { UserModule } from '@/user/user.module';
 
 @Module({
   imports: [
@@ -22,6 +27,11 @@ import { EpisodesModule } from '@/episodes/episodes.module';
     AuthModule,
     AnimeModule,
     EpisodesModule,
+    ProgressModule,
+    FavoritesModule,
+    RatingsModule,
+    CommentsModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

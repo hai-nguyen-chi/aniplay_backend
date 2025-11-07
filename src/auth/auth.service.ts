@@ -53,9 +53,9 @@ export class AuthService {
 
   async verifyRefreshToken(refreshToken: string): Promise<UserDocument> {
     const secret = this.config.get<string>('REFRESH_JWT_SECRET') as string;
-    let payload: any;
+    let payload: { sub: string };
     try {
-      payload = await this.jwtService.verifyAsync(refreshToken, { secret });
+      payload = await this.jwtService.verifyAsync<{ sub: string }>(refreshToken, { secret });
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }

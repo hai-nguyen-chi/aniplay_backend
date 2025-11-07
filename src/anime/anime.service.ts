@@ -19,9 +19,9 @@ export class AnimeService {
 
   async findAll(query: QueryAnimeDto) {
     const { q, offset = 0, limit = 20 } = query;
-    const filter: FilterQuery<AnimeDocument> = {} as any;
+    const filter: FilterQuery<AnimeDocument> = {};
     if (q && q.trim()) {
-      (filter as any).$or = [
+      filter.$or = [
         { title: { $regex: q, $options: 'i' } },
         { slug: { $regex: q, $options: 'i' } },
       ];
@@ -40,8 +40,8 @@ export class AnimeService {
   }
 
   async update(id: string, dto: UpdateAnimeDto) {
-    if ((dto as any).slug) {
-      const dup = await this.animeModel.exists({ _id: { $ne: id }, slug: (dto as any).slug }).lean();
+    if (dto.slug) {
+      const dup = await this.animeModel.exists({ _id: { $ne: id }, slug: dto.slug }).lean();
       if (dup) throw new ConflictException('Slug already exists');
     }
     const doc = await this.animeModel.findByIdAndUpdate(id, dto, { new: true }).lean().exec();
